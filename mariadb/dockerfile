@@ -1,0 +1,15 @@
+# MariaDB 이미지를 사용
+FROM mariadb:10.5
+
+# MariaDB 환경 변수 설정
+ENV MYSQL_ROOT_PASSWORD=root \
+    MYSQL_DATABASE=pratice_board \
+    MYSQL_USER=user \
+    MYSQL_PASSWORD=userpassword
+
+# 초기화 SQL 스크립트 복사
+COPY ./createDB.sql /docker-entrypoint-initdb.d/createDB.sql
+
+# 헬스 체크 설정
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD mysqladmin ping -h localhost || exit 1
