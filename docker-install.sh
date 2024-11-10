@@ -32,6 +32,5 @@ sudo systemctl enable docker
 sudo usermod -aG docker $DOCKER_USER
 
 # Apply group changes without restarting
-newgrp docker << EOF
-echo "Docker installation completed. You can now use Docker commands without sudo."
-EOF
+sudo usermod -aG docker $DOCKER_USER
+newgrp docker
