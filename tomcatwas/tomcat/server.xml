@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Server port="-1" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+
+  <GlobalNamingResources>
+    <Resource name="jdbc/pratice_board" 
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              driverClassName="org.mariadb.jdbc.Driver"
+              url="jdbc:mariadb://localhost:3306/pratice_board"
+              username="user"
+              password="userpassword"
+              maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="10000"/>
+  </GlobalNamingResources>
+
+  <Service name="Catalina">
+    <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
+    
+    <Engine name="Catalina" defaultHost="localhost">
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+      </Realm>
+
+      <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
+        <!-- MariaDB JDBC Context 추가 -->
+        <Context docBase="/usr/local/tomcat/webapps/images" path="/images" reloadable="true">
+          <ResourceLink name="jdbc/pratice_board" global="jdbc/pratice_board" auth="Container" type="javax.sql.DataSource"/>
+        </Context>
+
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+      </Host>
+    </Engine>
+  </Service>
+</Server>
