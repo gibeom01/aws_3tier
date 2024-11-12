@@ -20,7 +20,7 @@ COPY ./index.html /usr/local/tomcat/webapps/ROOT/
 COPY ./mariadb-java-client-3.0.3.jar /usr/local/tomcat/lib/
 COPY ./post/* /usr/local/tomcat/webapps/ROOT/post/
 COPY ./post/*.jpg /usr/local/tomcat/webapps/images/
-COPY ./video/*.mp4 /usr/local/tomcat/webapps/video/
+COPY ./video/* /usr/local/tomcat/webapps/video/
 COPY ./webapp/* /usr/local/tomcat/webapps/
 COPY BookMarket.war /usr/local/tomcat/webapps/
 COPY server.xml /usr/local/tomcat/conf/
