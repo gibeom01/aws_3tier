@@ -11,7 +11,7 @@
     <h1>동영상 재생</h1>
     <%
         // 데이터베이스 연결 설정
-        String url = "jdbc:mysql://192.168.56.21:3306/video_database";
+        String url = "jdbc:mariadb://192.168.56.21:3306/video_database";
         String user = "root"; // MySQL 사용자 이름
         String password = "root"; // MySQL 비밀번호
         
@@ -22,7 +22,7 @@
 
         try {
             // JDBC 드라이버 로드
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.mariadb.jdbc.Driver");
             
             // 데이터베이스 연결
             conn = DriverManager.getConnection(url, user, password);
