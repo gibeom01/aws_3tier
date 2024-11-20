@@ -10,8 +10,8 @@
 %>
 
 <sql:setDataSource var="dataSource"
-	url="jdbc:mysql://192.168.1.21:3306/BookMarketDB?serverTimezone=Asia/Seoul&useSSL=false"
-	driver="com.mysql.jdbc.Driver" user="root" password="root" />
+	url="jdbc:mariadb://192.168.1.21:3306/BookMarketDB?serverTimezone=Asia/Seoul&useSSL=false"
+	driver="org.mariadb.jdbc.Driver" user="root" password="root" />
 
 <sql:query dataSource="${dataSource}" var="resultSet">
    SELECT * FROM member WHERE ID=? and password=?  
